@@ -42,61 +42,73 @@
 
 <body>
 
-@include('layouts.inc.frontnavbar')
-<div class="content">
-    @yield('content')
-</div>
+    @include('layouts.inc.frontnavbar')
+    <div class="content">
+        @yield('content')
+    </div>
 
-<div class="whatapp-chat">
-    <a href="https://wa.me/xxx?text=I'm%20interested%20in%20your%20car%20for%20sale" target="_blank">
-        <img src="{{ asset('assets/images/test.png') }}" alt="whatapp-logo" heigth="60px" width="60px">
-    </a>
-</div>
+    <div class="whatapp-chat">
+        <a href="https://wa.me/xxx?text=I'm%20interested%20in%20your%20car%20for%20sale" target="_blank">
+            <img src="{{ asset('assets/images/test.png') }}" alt="whatapp-logo" heigth="60px" width="60px">
+        </a>
+    </div>
 
-<script src="{{ asset('frontend/js/custom.js')}}"></script>
+    <script src="{{ asset('frontend/js/custom.js')}}"></script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API = Tawk_API || {},
-        Tawk_LoadStart = new Date();
-    (function() {
-        var s1 = document.createElement("script"),
-            s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/xxx';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/xxx';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 
-<script>
-    var availableTags = [];
-    $.ajax({
-        method: "GET",
-        url: "/product-list",
-        success: function(response) {
-            console.log(response);
-            startAutoComplete(response);
-        }
-    });
-
-    function startAutoComplete(availableTags) {
-        $("#search_product").autocomplete({
-            source: availableTags
+    <script>
+        var availableTags = [];
+        $.ajax({
+            method: "GET",
+            url: "/product-list",
+            success: function(response) {
+                console.log(response);
+                startAutoComplete(response);
+            }
         });
-    }
-</script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-@if(session('status'))
+        function startAutoComplete(availableTags) {
+            $("#search_product").autocomplete({
+                source: availableTags
+            });
+        }
+    </script>
+    // Used to toggle the menu on small screens when clicking on the menu button
+    <script>    
+    function myFunction() {
+            var x = document.getElementById("toolbar");
+            if (x.className.indexOf("toolbar-show") == -1) {
+                x.className += " toolbar-show";
+            } else {
+                x.className = x.className.replace(" toolbar-show", "");
+            }
+        }
+
+    </script>
+    <!-- <script src="https://kit.fontawesome.com/f1f646c5e0.js" crossorigin="anonymous"></script> -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @if(session('status'))
     <script>
         swal("{{ session('status') }}");
     </script>
-@endif
-<script src="https://kit.fontawesome.com/f1f646c5e0.js" crossorigin="anonymous"></script>
-@yield('scripts')
+    @endif
+    <script src="https://kit.fontawesome.com/f1f646c5e0.js" crossorigin="anonymous"></script>
+    @yield('scripts')
 
 </body>
 
